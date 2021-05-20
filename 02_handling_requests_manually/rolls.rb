@@ -15,7 +15,7 @@ loop do
   client = server.accept
   request_line = client.gets
   puts request_line
-
+  next unless request_line
   http_method, path, params = parse_request(request_line)
   client.puts "HTTP/1.1 200 OK"
   client.puts "Content-Type: text/html"
