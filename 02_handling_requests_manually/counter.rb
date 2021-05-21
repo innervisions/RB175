@@ -25,7 +25,6 @@ loop do
   client.puts '<body>'
   client.puts '<pre>'
   client.puts request_line
-  
   client.puts http_method
   client.puts path
   client.puts params
