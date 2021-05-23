@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Directory Index</title>
+  </head>
+  <body>
+    <h2>Dynamic Directory Index</h2>
+    <ul>
+    <% @files.each do |file| %>
+      <li>
+        <a href="/<%= file %>"><%= file %></a>
+      </li>
+    <% end %>
+    </ul>
+    <% if @sort == "descending" %>
+      <a href="/">Sort ascending</a>
+    <% else %>
+      <a href="?sort=descending">Sort descending</a>
+    <% end %>
+  </body>
+</html>
