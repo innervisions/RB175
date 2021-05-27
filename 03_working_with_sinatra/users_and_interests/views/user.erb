@@ -1,0 +1,11 @@
+<h3><%= @user_name %></h4>
+<p>Email: <%= @email %></p>
+<p>Interests: <%= @interests.join(', ') %></p>
+<h4>Other Users</h4>
+<ul>
+<% @users.except(@user_name).keys.each do |name| %>
+  <li>
+    <a href="/<%= name %>"><%= name %></a>
+  </li>
+<% end %>
+</ul>
