@@ -12,8 +12,15 @@
     <h2 class="content-subhead">Results for '<%= params[:query]%>'</h2>
 
     <ul>
-      <% @results.each do |result| %>
-        <li><a href="/chapters/<%= result[:number] %>"><%= result[:name] %></a></li>
+      <% @results.keys.each do |name| %>
+        <li><%= name %></li>
+        <ul>
+          <% @results[name].each do |hsh| %>
+            <li><a href="/chapters/<%= hsh[:number] %>#<%= hsh[:id] %>">
+              <%= highlight_match(hsh[:paragraph], params[:query]) %>
+            </a></li>
+          <% end %>
+        </ul>
       <% end %>
     </ul>
   <% end %>

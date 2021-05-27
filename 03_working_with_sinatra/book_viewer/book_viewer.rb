@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/reloader"
 require "tilt/erubis"
-set :bind, '0.0.0.0'
+# set :bind, '0.0.0.0'
 set :port, 8080
 
 before do
@@ -30,14 +30,16 @@ def each_chapter
 end
 
 def chapters_matching(query)
-  results = []
-
+  results = {}
   return results if !query || query.empty?
-
   each_chapter do |number, name, contents|
-    results << { number: number, name: name } if contents.include?(query)
+    contents.split("\n\n").each_with_index do |paragraph, idx|
+      if paragraph.include?(query)
+        results[name] ||= []
+        results[name] << { number: number, paragraph: paragraph, id: idx + 1 }
+      end
+    end
   end
-
   results
 end
 
@@ -57,5 +59,9 @@ helpers do
       id += 1
       "<p id=#{id}>#{paragraph}</p>"
     end.join
+  end
+
+  def highlight_match(text, match)
+    text.gsub(match, "<strong>#{match}</strong>")
   end
 end
