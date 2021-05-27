@@ -1,7 +1,7 @@
 require "sinatra"
 require "sinatra/reloader"
 require "tilt/erubis"
-# set :bind, '0.0.0.0'
+set :bind, '0.0.0.0'
 set :port, 8080
 
 before do
